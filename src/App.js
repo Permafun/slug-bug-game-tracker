@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import ScoreHistory from "./scores/pages/ScoreHistory";
+import TodayScore from "./scores/pages/TodayScore";
+import NavBar from "./shared/components/NavBar";
+import { CssBaseline } from "@material-ui/core";
+import UpdateScore from "./scores/pages/UpdateScore";
 
 function App() {
+  let routes;
+
+  routes = (
+    <Switch>
+      <Route path="/" exact>
+        <TodayScore />
+      </Route>
+      <Route path="/history">
+        <ScoreHistory />
+      </Route>
+      <Route path="/update/:scoreId">
+        <UpdateScore />
+      </Route>
+    </Switch>
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <CssBaseline />
+      <NavBar />
+      {routes}
+    </Router>
   );
 }
 
