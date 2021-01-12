@@ -23,7 +23,7 @@ const TodayScore = () => {
 			<Paper className={classes.pageContent}>
 				<ScoreForm
 					initialState={initialValues}
-					url='http://localhost:5000/api/scores'
+					url={`${process.env.REACT_APP_BACKEND_URL}`}
 					methodOnSave='POST'
 					update={false}
 					duration={3000}

@@ -17,8 +17,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CancelIcon from '@material-ui/icons/Cancel';
 import React, { useState } from 'react';
-import Button from '../../shared/components/FormElements/Button';
 import { useHistory } from 'react-router-dom';
+
+import Button from '../../shared/components/FormElements/Button';
 import Toast from '../../shared/components/Toast';
 
 const useStyles = makeStyles((theme) => ({
@@ -80,16 +81,17 @@ const ScoreItem = ({
 		e.preventDefault();
 
 		try {
-			const response = await fetch(`http://localhost:5000/api/scores/${id}`, {
-				method: 'DELETE',
-			});
+			const response = await fetch(
+				`${process.env.REACT_APP_BACKEND_URL}/${id}`,
+				{
+					method: 'DELETE',
+				}
+			);
 			const responseData = await response.json();
 
-			if (response.ok) {
-				setMessage(responseData.message);
-				handleToastOpen();
-				setTimeout(() => onDelete(id), 3000);
-			}
+			setMessage(responseData.message);
+			handleToastOpen();
+			setTimeout(() => onDelete(id), 3000);
 		} catch (err) {
 			console.log(err);
 		}
@@ -175,22 +177,24 @@ const ScoreItem = ({
 						<Typography className={classes.cardTextC}>{winnerText}</Typography>
 					</CardContent>
 					<CardActions className={classes.cardActions}>
-						<Button
-							onClick={() => history.push(`/update/${id}`)}
-							disabled={isFinished}
-							startIcon={<EditIcon />}
-						>
-							EDIT
-						</Button>
-						<Button
-							variant='outlined'
-							color='secondary'
-							onClick={handleClickOpen}
-							startIcon={<DeleteIcon />}
-							disabled={isFinished}
-						>
-							DELETE
-						</Button>
+						{!isFinished && (
+							<>
+								<Button
+									onClick={() => history.push(`/update/${id}`)}
+									startIcon={<EditIcon />}
+								>
+									EDIT
+								</Button>
+								<Button
+									variant='outlined'
+									color='secondary'
+									onClick={handleClickOpen}
+									startIcon={<DeleteIcon />}
+								>
+									DELETE
+								</Button>
+							</>
+						)}
 					</CardActions>
 				</Card>
 			</li>

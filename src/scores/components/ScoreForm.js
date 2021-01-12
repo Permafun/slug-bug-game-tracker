@@ -45,13 +45,6 @@ const useStyles = makeStyles((theme) => ({
 		display: 'inline-block',
 		margin: theme.spacing(1),
 	},
-	scoreDiv: {
-		flexGrow: 1,
-		'& > *': {
-			margin: theme.spacing(1),
-		},
-		display: 'inline-block',
-	},
 }));
 
 const ScoreForm = ({
@@ -66,9 +59,8 @@ const ScoreForm = ({
 	const classes = useStyles();
 	const [open, setOpen] = useState(false);
 	const [alertOpen, setAlertOpen] = useState(false);
-	const history = useHistory();
-
 	const [scoreState, setScoreState] = useState(initialState);
+	const history = useHistory();
 
 	// Will fetch the previous score values if rendered from UpdateScore
 	useEffect(() => {
@@ -159,7 +151,7 @@ const ScoreForm = ({
 
 			if (response.ok) {
 				handleToastOpen();
-				setTimeout(() => history.push('/history'), 4000);
+				setTimeout(() => history.push('/history'), 2000);
 			}
 		} catch (err) {
 			console.log(err);
@@ -292,14 +284,16 @@ const ScoreForm = ({
 					>
 						CANCEL
 					</Button>
-					<Button
-						variant='outlined'
-						className={classes.button}
-						onClick={handleAlertOpen}
-						startIcon={<LockIcon />}
-					>
-						Lock
-					</Button>
+					{!scoreState.isFinished && (
+						<Button
+							variant='outlined'
+							className={classes.button}
+							onClick={handleAlertOpen}
+							startIcon={<LockIcon />}
+						>
+							Lock
+						</Button>
+					)}
 				</Grid>
 			</Grid>
 		</>

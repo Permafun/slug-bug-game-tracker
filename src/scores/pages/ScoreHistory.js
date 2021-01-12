@@ -7,7 +7,9 @@ const ScoreHistory = () => {
 	useEffect(() => {
 		const fetchScores = async () => {
 			try {
-				const responseData = await fetch(`http://localhost:5000/api/scores`);
+				const responseData = await fetch(
+					`${process.env.REACT_APP_BACKEND_URL}`
+				);
 				const response = await responseData.json();
 				setLoadedScores(response.scores);
 			} catch (err) {}

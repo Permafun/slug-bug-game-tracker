@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -18,9 +18,9 @@ export default function Toast(props) {
 				message={props.message}
 				action={
 					<React.Fragment>
-						<Button color='secondary' size='small' onClick={props.onClose}>
+						{/* <Button color='secondary' size='small' onClick={props.onClose}>
 							UNDO
-						</Button>
+						</Button> */}
 						<IconButton
 							size='small'
 							aria-label='close'

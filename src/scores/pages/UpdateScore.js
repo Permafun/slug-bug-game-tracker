@@ -25,7 +25,7 @@ const UpdateScore = (props) => {
 			<Paper className={classes.pageContent}>
 				<ScoreForm
 					initialState={initialValues}
-					url='http://localhost:5000/api/scores'
+					url={`${process.env.REACT_APP_BACKEND_URL}`}
 					methodOnSave='PATCH'
 					duration={3000}
 					update={true}
